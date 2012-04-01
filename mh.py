@@ -1,19 +1,24 @@
 #!/usr/bin/env python
+
 '''
-1. How do you know your function is correct? - compare to _, proof http://books.google.com/books?id=V8jT2SimGR0C&lpg=PA184&dq=metropolis%20hastings%20algorithm&pg=PA186#v=onepage&q=metropolis%20hastings%20algorithm&f=false
-2. Which parts of your function are slowest? What could you do to make them faster? - do timing tests, runtime O(?)
+This is an implementation of the Metropolis Hastings algorithm.
+This is used for Bayesian sampling from a distribution that's typically multidimensional and can't be numerically integrated.
+It utilizes Markov chains, which are ordered lists of stochastic (random) variables.
+The Markov chain wanders around, only remembering the state of the previous iteration.
+When the number of samples approaches infinity, the Markov chain will converge to the posterior distribution.
+
+Usage:
+Modify the posterior and proposal distribution functions in mh.py to suit your statistical model.
+
+references:
+"Pattern Recognition and Machine Learning" by Christopher Bishop
+"Information Theory, Inference, and Learning Algorithms" by David Mackay
+"Machine Learning: An Algorithmic Perspective" by Stephen Marsland
 '''
 
 import numpy as np
 from pylab import *
 import random
-
-# pi typically multivariate/multidimensional/joint dist. that can't be numerically integrated
-# transition matrix or kernel
-# the Markov chain wanders about the state space, remembering only where it has just been in the last time step
-# probability of moving back to the original value from the candidate, which is q( | )
-# the state moves to high-density points in the distribution with high probability, and to low-density points with low probability
-# markov chain will converge to posterior distribution
 
 class MH():
     def __init__(self, p, q, samples, method):
@@ -86,6 +91,7 @@ if __name__ == '__main__':
         # should be tuned to the posterior distribution
         # specify the hyperparameters (mean and variance)
         return exp(-(x-5)**2/(10**2)) # 5 = mu, 10 = sigma
+    
     model = MH(PosteriorDistribution,ProposalDistribution,10000,"independent") # last 2 args are # samples and method
     model.sample(5,10) # mu, sigma, burn-in.  for method="random_walk", set mu=0
     print 'A sample from the PDF is: ' + str(model.single_sample())

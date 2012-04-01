@@ -1,0 +1,13 @@
+This is an implementation of the Metropolis Hastings algorithm.
+This is used for Bayesian sampling from a distribution that's typically multidimensional and can't be numerically integrated.
+It utilizes Markov chains, which are ordered lists of stochastic (random) variables.
+The Markov chain wanders around, only remembering the state of the previous iteration.
+When the number of samples approaches infinity, the Markov chain will converge to the posterior distribution.
+
+Usage:
+Modify the posterior and proposal distribution functions in mh.py to suit your statistical model.
+
+references:
+"Pattern Recognition and Machine Learning" by Christopher Bishop
+"Information Theory, Inference, and Learning Algorithms" by David Mackay
+"Machine Learning: An Algorithmic Perspective" by Stephen Marsland
